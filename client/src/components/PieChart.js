@@ -2,16 +2,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/jsx-no-comment-textnodes */
 import React, { useEffect, useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { fetchApi } from "../redux";
 import { VictoryPie } from "victory";
 
 const PieChart = () => {
-    const pieChartData = useSelector(state => state.pieChart);
+    const pieChartData = useSelector(state => state.pieChart, shallowEqual);
     const dispatch = useDispatch();
-    
+
     useEffect(() => {
-      fetchApi();
       dispatch(fetchApi());
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dispatch]);
