@@ -5,7 +5,7 @@ import { fetchApi } from '../redux';
 import { VictoryPie } from 'victory';
 
 
-function PieChart({ pieChartData, fetchApi }) {
+const PieChart = ({ pieChartData, fetchApi }) => {
     useEffect(() => {
         fetchApi()
     // eslint-disable-next-line react-hooks/exhaustive-deps
