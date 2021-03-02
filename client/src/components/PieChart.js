@@ -1,15 +1,21 @@
+/* eslint-disable no-use-before-define */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/jsx-no-comment-textnodes */
 import React, { useEffect, useMemo } from "react";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchApi } from "../redux";
 import { VictoryPie } from "victory";
 
-const PieChart = ({ pieChartData, fetchApi }) => {
-  useEffect(() => {
-    fetchApi();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+const PieChart = () => {
+    const pieChartData = useSelector(state => state.pieChart);
+    const dispatch = useDispatch();
+    
+    useEffect(() => {
+      fetchApi();
+      dispatch(fetchApi());
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [dispatch]);
+    
 
   const ios = useMemo(() => 
     pieChartData.datas[0], [pieChartData.datas[0]]);
@@ -75,16 +81,4 @@ const PieChart = ({ pieChartData, fetchApi }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    pieChartData: state.pieChart,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchApi: () => dispatch(fetchApi()),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(PieChart);
+export default PieChart;
