@@ -36,7 +36,9 @@ span {
   height: 30px;
   -webkit-animation: spin 1s linear infinite; /* Safari */
   animation: spin 1s linear infinite;
-  margin: 10px auto;
+  position: absolute;
+  top: 43%;
+  left: 130px;
 }
 
 /* Safari */
