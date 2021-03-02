@@ -1,6 +1,6 @@
 import axios from "axios";
 import {
-  FETCH_API_REQUEST,
+  START_FETCH_API_OS,
   FETCH_API_SUCCESS,
   FETCH_API_ERROR,
 } from "./pieChartType";
@@ -22,7 +22,7 @@ export const fetchApi = () => {
 
 export const fetchApiRequest = () => {
   return {
-    type: FETCH_API_REQUEST,
+    type: START_FETCH_API_OS,
   };
 };
 

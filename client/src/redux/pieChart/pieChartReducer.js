@@ -1,5 +1,5 @@
 import {
-  FETCH_API_REQUEST,
+  START_FETCH_API_OS,
   FETCH_API_SUCCESS,
   FETCH_API_ERROR,
 } from "./pieChartType";
@@ -12,7 +12,7 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_API_REQUEST:
+    case START_FETCH_API_OS:
       return {
         ...state,
         loading: true,
