@@ -1,6 +1,6 @@
 import { VictoryPie } from "victory";
 
-export const Display = ({ ios, android, iosPer, androidPer, loadName }) => {
+export const DisplayOsChart = ({ ios, android, iosPer, androidPer }) => {
   return (
     <div>
       <h3>Device Type</h3>
@@ -11,7 +11,6 @@ export const Display = ({ ios, android, iosPer, androidPer, loadName }) => {
           marginLeft: '250px'
         }}
       >
-        <div className={loadName}></div>
         <svg width={400} height={300}>
           <VictoryPie
             colorScale={ios === 0 && android === 0 ? ["black"] : ["cyan", "purple"]}

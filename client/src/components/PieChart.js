@@ -4,7 +4,7 @@
 import React, { useEffect, useMemo } from "react";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { fetchApi } from "../redux";
-import { Display } from "./Display";
+import { DisplayOsChart } from "./DisplayOsChart";
 
 const PieChart = () => {
   const pieChartData = useSelector((state) => state.pieChart, shallowEqual);
@@ -28,21 +28,19 @@ const PieChart = () => {
   ) : pieChartData.error ? (
     <div>
         <h2>{pieChartData.error}</h2>
-        <Display
+        <DisplayOsChart
             ios={0}
             android={0}
             iosPer={0}
             androidPer={0}
-            loadName=""
         />
     </div>
   ) : (
-    <Display
+    <DisplayOsChart
       ios={ios}
       android={android}
       iosPer={iosPer}
       androidPer={androidPer}
-      loadName=""
     />
   );
 };
