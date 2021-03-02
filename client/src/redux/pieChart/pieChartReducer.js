@@ -19,14 +19,14 @@ const reducer = (state = initialState, action) => {
       };
     case FETCH_API_SUCCESS:
       return {
+        ...state,
         loading: false,
         datas: action.payload,
-        error: "",
       };
     case FETCH_API_ERROR:
       return {
+        ...state,
         loading: false,
-        datas: [],
         error: action.payload,
       };
     default:
