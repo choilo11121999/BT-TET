@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/jsx-no-comment-textnodes */
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { connect } from "react-redux";
 import { fetchApi } from "../redux";
 import { VictoryPie } from "victory";
@@ -9,10 +10,18 @@ const PieChart = ({ pieChartData, fetchApi }) => {
     fetchApi();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const ios = pieChartData.datas[0];
-  const android = pieChartData.datas[1];
-  const iosPer = Math.round((ios / (ios + android)) * 100);
-  const androidPer = Math.round((android / (ios + android)) * 100);
+
+  const ios = useMemo(() => 
+    pieChartData.datas[0], [pieChartData.datas[0]]);
+  const android = useMemo(() => 
+    pieChartData.datas[1], [pieChartData.datas[1]]);
+  const iosPer = useMemo(() => {
+    return Math.round((ios / (ios + android)) * 100)
+  }, [ios, android]);
+  const androidPer =  useMemo(() => {
+    return Math.round((android / (ios + android)) * 100)
+  }, [ios, android]);
+
   return pieChartData.loading ? (
     <h2>Loading</h2>
   ) : pieChartData.error ? (
