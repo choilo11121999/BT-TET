@@ -16,8 +16,7 @@ const PieChart = () => {
     }, [dispatch]);
     
 
-  const ios =  pieChartData.datas[0];
-  const android =  pieChartData.datas[1];
+  const [ios, android] =  pieChartData.datas;
   const iosPer = useMemo(() => {
     return Math.round((ios / (ios + android)) * 100)
   }, [ios, android]);
