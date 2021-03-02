@@ -28,7 +28,7 @@ const PieChart = () => {
   }, [ios, android]);
 
   return pieChartData.loading ? (
-    <h2>Loading</h2>
+    <div className='loader'></div>
   ) : pieChartData.error ? (
     <h2>{pieChartData.error}</h2>
   ) : (
@@ -49,7 +49,7 @@ const PieChart = () => {
             innerRadius={75}
             data={[
               { x: "ios", y: iosPer },
-              { x: "adr", y: androidPer },
+              { x: "and", y: androidPer },
             ]}
           />
         </svg>
