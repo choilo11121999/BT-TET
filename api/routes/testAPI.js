@@ -1,8 +1,11 @@
-var express = require('express');
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
 
-router.get('/', function(req, res, next) {
-    res.send("API test is working!");
+router.get("/", function (req, res, next) {
+  const ios = Math.floor(Math.random() * 1000);
+  const android = Math.floor(Math.random() * 1000);
+  const data = [ios, android];
+  res.send(data);
 });
 
 module.exports = router;

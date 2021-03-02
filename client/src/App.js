@@ -1,44 +1,16 @@
-import './App.css';
-import React, { Component } from 'react';
-
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      apiResponse: ''
-    };
-  }
-
-  callApi() {
-    fetch('http://localhost:9000/api')
-      .then(res => res.text())
-      .then(res => this.setState({apiResponse: res}));
-  }
-
-  componentDidMount() {
-    this.callApi();
-  }
-
-  render() {
-    return (
+import React from "react";
+import { Provider } from "react-redux";
+import "./App.css";
+import store from "./redux/store";
+import PieChart from "./components/PieChart";
+function App() {
+  return (
+    <Provider store={store}>
       <div className="App">
-        <header className="App-header">
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-        <p>{this.state.apiResponse}</p>
+        <PieChart />
       </div>
-    );
-  }
+    </Provider>
+  );
 }
 
 export default App;
