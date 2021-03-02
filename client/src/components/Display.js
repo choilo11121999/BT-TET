@@ -8,19 +8,19 @@ export const Display = ({ ios, android, iosPer, androidPer, loadName }) => {
         style={{
           display: "flex",
           alignItems: "center",
-          position: "relative",
+          marginLeft: '250px'
         }}
       >
         <div className={loadName}></div>
         <svg width={400} height={300}>
           <VictoryPie
-            colorScale={["cyan", "purple"]}
+            colorScale={ios === 0 && android === 0 ? ["black"] : ["cyan", "purple"]}
             standalone={false}
             width={300}
             height={300}
             innerRadius={75}
             data={[
-              { x: "i", y: iosPer },
+              { x: "i", y: ios === 0 && android === 0 ? 1 : ios },
               { x: "a", y: androidPer },
             ]}
           />

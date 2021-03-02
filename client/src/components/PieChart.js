@@ -24,15 +24,18 @@ const PieChart = () => {
   }, [ios, android]);
 
   return pieChartData.loading ? (
-    <Display
-      ios={1}
-      android={0}
-      iosPer={100}
-      androidPer={0}
-      loadName="loader"
-    />
+    <div className='loader'></div>
   ) : pieChartData.error ? (
-    <h2>{pieChartData.error}</h2>
+    <div>
+        <h2>{pieChartData.error}</h2>
+        <Display
+            ios={0}
+            android={0}
+            iosPer={0}
+            androidPer={0}
+            loadName=""
+        />
+    </div>
   ) : (
     <Display
       ios={ios}
