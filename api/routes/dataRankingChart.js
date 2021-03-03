@@ -2,21 +2,18 @@ const express = require("express");
 const router = express.Router();
 
 router.get("/", function (req, res, next) {
-  const ios = [];
+  const iosArr = [];
   for (let index = 0; index < 50; index++) {
-    ios.push(Math.floor(Math.random() * 30));
+    iosArr.push(Math.floor(Math.random() * 30));
   }
-  const android = [];
+  const androidArr = [];
   for (let index = 0; index < 50; index++) {
-    android.push(Math.floor(Math.random() * 30));
+    androidArr.push(Math.floor(Math.random() * 30));
   }
-  const data = {
-    ios: ios,
-    android: android
-  }
+  const data = [iosArr, androidArr];
   setTimeout(() => {
     res.send(JSON.stringify(data));
-  }, 500);
+  }, 5000);
 });
 
 module.exports = router;
