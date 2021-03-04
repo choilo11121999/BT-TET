@@ -12,22 +12,20 @@ const RankingChart = () => {
     shallowEqual
   );
   const dispatch = useDispatch();
-
+  
   useEffect(() => {
     dispatch(fetchDataRanking());
   }, [dispatch]);
-
-  const [ios, android] = rankingChartSate.data;
 
   return rankingChartSate.loading ? (
     <div className="loader"></div>
   ) : rankingChartSate.error ? (
     <div>
       <h2 style={{ textAlign: "center" }}>{rankingChartSate.error}</h2>
-      <DisplayRankingChart ios={ios} android={android} />
+      <DisplayRankingChart data={rankingChartSate.data} />
     </div>
   ) : (
-    <DisplayRankingChart ios={ios} android={android} />
+    <DisplayRankingChart data={rankingChartSate.data} />
   );
 };
 

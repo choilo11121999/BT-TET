@@ -1,45 +1,48 @@
-import React, { useMemo } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useMemo, useEffect, useState } from "react";
 import Chart from "react-apexcharts";
 
-export const DisplayRankingChart = ({ ios, android }) => {
-  // Du lieu truc X
-  const categories = ios
-    ? ios.map((data, index) => {
-        switch (index) {
-          case 0:
-            return "2019-07-01";
-          case 17:
-            return "2019-08-08";
-          case 34:
-            return "2019-09-15";
-          case 49:
-            return "2019-10-23";
-          default:
-            return "";
-        }
-      })
-    : [];
+export const DisplayRankingChart = ({ data }) => {
+  const date = [], ios = [], android = [];
+  const [state, setstate] = useState({
+    date: [],
+    ios: [],
+    android: []
+  });
+
+  useEffect(() => {
+    data.forEach(element => {
+        date.push(element.date);
+        ios.push(element.ios);
+        android.push(element.android);
+    });
+    setstate({
+      date: date,
+      ios: ios,
+      android: android
+    });
+  }, [data]);
 
   // Tong so IOS
   const sumIos = useMemo(() => {
-    return ios ? ios.reduce((a, b) => a + b, 0) : 0;
-  }, [ios]);
+    return state.ios.reduce((a,b) => a + b, 0)
+  }, [state.ios]);
 
   // Tong so Android
   const sumAndroid = useMemo(() => {
-    return android ? android.reduce((a, b) => a + b, 0) : 0;
-  }, [android]);
+    return state.android.reduce((a,b) => a + b, 0)
+  }, [state.android]);
 
   // Du lieu de tao Chart
   const sampleData = {
     series: [
       {
         name: "iOS",
-        data: ios,
+        data: state.ios,
       },
       {
         name: "Android",
-        data: android,
+        data: state.android,
       },
     ],
     options: {
@@ -70,10 +73,16 @@ export const DisplayRankingChart = ({ ios, android }) => {
         borderColor: "#e7e7e7",
       },
       xaxis: {
-        categories: categories,
+        categories: state.date,
         labels: {
           show: true,
           rotate: 0,
+          formatter: function (val) {
+            return val === state.date[0] || 
+                  val === state.date[state.date.length-1] ||
+                  val === state.date[state.date.length/3] ||
+                  val === state.date[2*state.date.length/3] ? val : "";
+          },
         },
       },
       yaxis: {
