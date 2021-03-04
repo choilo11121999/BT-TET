@@ -1,48 +1,35 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useMemo, useEffect, useState } from "react";
+import React, { useMemo } from "react";
 import Chart from "react-apexcharts";
+import { map, sum } from "lodash";
 
 export const DisplayRankingChart = ({ data }) => {
   const date = [], ios = [], android = [];
-  const [state, setstate] = useState({
-    date: [],
-    ios: [],
-    android: []
-  });
 
-  useEffect(() => {
-    data.forEach(element => {
-        date.push(element.date);
-        ios.push(element.ios);
-        android.push(element.android);
-    });
-    setstate({
-      date: date,
-      ios: ios,
-      android: android
-    });
+  const pushData = (arr, data) => map(data, (n) => arr.push(n));
+
+  useMemo(() => {
+    pushData(date, data.date);
+    pushData(ios, data.ios);
+    pushData(android, data.android);
   }, [data]);
 
   // Tong so IOS
-  const sumIos = useMemo(() => {
-    return state.ios.reduce((a,b) => a + b, 0)
-  }, [state.ios]);
+  const sumIos = useMemo(() => sum(ios), [ios]);
 
   // Tong so Android
-  const sumAndroid = useMemo(() => {
-    return state.android.reduce((a,b) => a + b, 0)
-  }, [state.android]);
+  const sumAndroid = useMemo(() => sum(android), [android]);
 
   // Du lieu de tao Chart
   const sampleData = {
     series: [
       {
         name: "iOS",
-        data: state.ios,
+        data: ios,
       },
       {
         name: "Android",
-        data: state.android,
+        data: android,
       },
     ],
     options: {
@@ -73,27 +60,16 @@ export const DisplayRankingChart = ({ data }) => {
         borderColor: "#e7e7e7",
       },
       xaxis: {
-        categories: state.date,
+        categories: date,
         labels: {
           show: true,
-          rotate: 0,
-          formatter: function (val) {
-            return val === state.date[0] || 
-                  val === state.date[state.date.length-1] ||
-                  val === state.date[state.date.length/3] ||
-                  val === state.date[2*state.date.length/3] ? val : "";
-          },
+          rotate: 0
         },
       },
       yaxis: {
         tickAmount: 3,
         min: 0,
         max: 30,
-        labels: {
-          formatter: function (val) {
-            return val === 10 || val === 20 ? val : "";
-          },
-        },
       },
       legend: {
         show: false,
