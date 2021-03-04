@@ -1,27 +1,32 @@
 const express = require("express");
 const router = express.Router();
+const { times } = require("lodash");
+const moment = require("moment");
 
 router.get("/", function (req, res, next) {
-  const time = [];
-  for (let i = 11; i <= 12; i++) {
-    for (let j = 1; j <= 30; j++) {
-      time.push({
-        year: '2020',
-        month: i < 10 ? `0${i}` : i,
-        day: j < 10 ? `0${j}` : j
-      });
-    }
+  const date = [];
+  var length = 0, day = 1, month = 12, year = 2020;
+  while (length <= 50) {
+    day > 31 ? (month ++, day = 1) : (day, month);
+    month > 12 ? (month = 1, year++) : (month, year);
+    const time = moment((`${year}-${month}-${day}`));
+    (time.isValid()) ? date.push(time.format('YYYY-MM-DD')) : date;
+    day++;
+    length = date.length;
   }
-  
-  const data = time.map((time, index) => {
-    return {
-      date: `${time.year}-${time.month}-${time.day}`,
-      ios: Math.floor(Math.random() * 30),
-      android: Math.floor(Math.random() * 30)
-    }
-  });
+
+  const getRandomInteger = () => {
+    return Math.floor(Math.random() * 30)
+  }
+  const ios = times(50, getRandomInteger);
+  const android = times(50, getRandomInteger);
+  const data = {
+    date: date,
+    ios: ios,
+    android: android
+  }
   setTimeout(() => {
-    res.send(JSON.stringify(data));
+    res.send(data);
   }, 5000);
 });
 
