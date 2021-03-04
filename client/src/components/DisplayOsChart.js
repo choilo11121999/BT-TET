@@ -3,28 +3,27 @@ import { VictoryPie } from "victory";
 export const DisplayOsChart = ({ ios, android, iosPer, androidPer }) => {
   return (
     <div>
-      <h3>Device Type</h3>
+      <h3 style={{marginLeft: '30px', marginTop: '15px'}}>Device Type</h3>
       <div
         style={{
           display: "flex",
-          alignItems: "center",
-          marginLeft: '250px'
+          alignItems: "center"
         }}
       >
-        <svg width={400} height={300}>
+        <svg width={300} height={300}>
           <VictoryPie
-            colorScale={ios === 0 && android === 0 ? ["black"] : ["cyan", "purple"]}
+            colorScale={ios === 0 && android === 0 ? ["black"] : ["#48c0b0", "#925de2"]}
             standalone={false}
-            width={300}
-            height={300}
-            innerRadius={75}
+            width={240}
+            height={240}
+            innerRadius={50}
             data={[
               { x: "i", y: ios === 0 && android === 0 ? 1 : ios },
               { x: "a", y: androidPer },
             ]}
           />
         </svg>
-        <div>
+        <div style={{marginTop: '-20px', marginLeft: '20px'}}>
           <table>
             <tr>
               <td>

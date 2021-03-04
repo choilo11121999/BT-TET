@@ -27,7 +27,7 @@ const PieChart = () => {
     <div className='loader'></div>
   ) : pieChartData.error ? (
     <div>
-        <h2>{pieChartData.error}</h2>
+        <h2 style={{textAlign: 'center'}}>{pieChartData.error}</h2>
         <DisplayOsChart
             ios={0}
             android={0}
