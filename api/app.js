@@ -7,6 +7,7 @@ const cors = require('cors');
 
 const apiRouter = require('./routes/testAPI');
 const dataRankingChartRouter = require('./routes/dataRankingChart');
+const dataHeatChartRouter = require('./routes/dataHeatChart');
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api', apiRouter);
 app.use('/dataRankingChart', dataRankingChartRouter);
+app.use('/dataHeatChart', dataHeatChartRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

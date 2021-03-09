@@ -85,7 +85,7 @@ export const DisplayRankingChart = ({ data }) => {
         series={sampleData.series}
         type="line"
         width="750"
-        height="250"
+        height="200"
       />
       <div>
         <ul style={{ listStyleType: "none", display: "flex" }}>
