@@ -4,29 +4,17 @@ import _ from 'lodash';
 
 export const DisplayHeatChart = ({ dataHeat }) => {
   // Data cho Heat chart
-  const seriesDataHeat = useMemo(() => {
-    return _.map(dataHeat, (dt) => {
-      return {
-        name: dt.day,
-        data: _.map(dt.hours, (hour) => {
-          return {
-            x: hour.time,
-            y: hour.value
-          }
-        })
-      }
-    })
-  }, [dataHeat]);
+  const seriesDataHeat = useMemo(() => (
+    _.map(dataHeat, (dt) => ({
+      name: dt.day,
+      data: _.map(dt.hours, (hour) => ({ x: hour.time, y: hour.value }))
+    }))), [dataHeat]);
 
   // Data cho Bar chart
-  const seriesDataBar = useMemo(() => {
-    return {
-      data: _.map(seriesDataHeat, (dt) => {
-        return _.sumBy(dt.data, (o) => o.y)
-      }),
-      category: _.map(seriesDataHeat, (dt) => dt.name)
-    }
-  }, [seriesDataHeat]);
+  const seriesDataBar = useMemo(() => ({
+    data: _.map(seriesDataHeat, (dt) =>  _.sumBy(dt.data, (o) => o.y)),
+    category: _.map(seriesDataHeat, (dt) => dt.name)
+  }), [seriesDataHeat]);
 
   // Sample data cho Heat chart
   const sampleDataHeat = {

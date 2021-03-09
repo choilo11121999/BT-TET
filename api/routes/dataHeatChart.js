@@ -8,8 +8,8 @@ router.get("/", function (req, res, next) {
     (day) => ({
       day: day,
       hours: _.map(_.range(0, 23), time => ({
-      time: `${time}:00`,
-      value: _.random(0, 2) !== 2 ? _.random(0, 30) : _.random(0, 50)
+        time: `${time}:00`,
+        value: _.random(0, 2) !== 2 ? _.random(0, 30) : _.random(0, 50)
       }))
     })
   )
